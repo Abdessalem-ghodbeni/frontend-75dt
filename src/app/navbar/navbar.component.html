@@ -1,0 +1,54 @@
+
+
+<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYt033H8x53fAKuzbz74Ty5oYfx-wDNIzavg&s"
+       style="background-color: white; height: 70px;"/>
+
+
+
+  <!-- Divider -->
+  <hr class="sidebar-divider my-0">
+
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Interface
+  </div>
+
+
+
+
+
+  <li *ngIf='sessionStorage.getItem("role")==="ADMIN"' class="nav-item">
+    <a class="nav-link" routerLink="/list-employe" routerLinkActive="active">
+      <i class="fas fa-fw fa-user-check"></i>
+      <span>Employe</span>
+    </a>
+  </li>
+
+  <!-- Nav Item - Tables -->
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/list-customer" routerLinkActive="active">
+      <i class="fas fa-fw fa-user"></i>
+      <span>Customer</span>
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/list-account" routerLinkActive="active">
+      <i class="fas fa-fw fa-user"></i>
+      <span>Account</span>
+    </a>
+  </li>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider d-none d-md-block">
+
+
+
+</ul>
+

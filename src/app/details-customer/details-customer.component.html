@@ -1,0 +1,223 @@
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+  <app-navbar></app-navbar>
+
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+      <app-navbartop></app-navbartop>
+
+
+
+
+
+
+
+
+
+
+
+      <!-- Begin Page Content -->
+      <div class="container-fluid">
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">EDIT CUSTOMER</h6>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+              <div class="form-group row">
+                <div class="col-sm-3 mb-3 mb-sm-0">
+                  <a>Name : </a>
+
+                  <input type="text" class="form-control" formControlName="name" placeholder="Name" required >
+                </div>
+                <div class="col-sm-2 mb-3 mb-sm-0">
+                  <a>Type :</a>
+                  <select class="form-control" formControlName="type" required (change)="changeType()">
+                    <option [ngValue]="'PP'">PP</option>
+                    <option [ngValue]="'PM'">PM</option>
+                  </select>
+                </div>
+                <div *ngIf="genderEnabled===true" class="col-sm-2 mb-3 mb-sm-0">
+                  <a>Gender :</a>
+                  <select class="form-control" formControlName="gender" >
+                    <option [ngValue]="'male'">Male</option>
+                    <option [ngValue]="'female'">Female</option>
+                  </select>
+                </div>
+                <div class="col-sm-2 mb-3 mb-sm-0">
+                  <a>Date Creation : </a>
+
+                  <input type="date" class="form-control" formControlName="dateBirthCreation" placeholder="Date Creation" required>
+                </div>
+                <div class="col-sm-2">
+                  <a>Address : </a>
+
+                  <input type="text" class="form-control" formControlName="address" placeholder="address" required>
+                </div>
+
+
+              </div>
+              <div class="form-group row">
+
+                <div class="col-sm-3 mb-3 mb-sm-0">
+                  <a>Post Code : </a>
+
+                  <input type="number" class="form-control" formControlName="postCode" placeholder="Post Code" required >
+                </div>
+
+                <div class="col-sm-3 mb-3 mb-sm-0">
+                  <a>Legal doc name : </a>
+
+                  <input type="text" class="form-control" formControlName="legalDocName" placeholder="{{placeholderlegaldocname}}" required >
+                </div>
+                <div class="col-sm-3 mb-3 mb-sm-0">
+                  <a>Legal ID : </a>
+
+                  <input type="text" class="form-control" formControlName="legalId" placeholder="Legal id" required >
+                </div>
+                <div class="col-sm-2 mb-3 mb-sm-0">
+                  <a>Nationality :</a>
+                  <select class="form-control" formControlName="nationality" >
+                    <option *ngFor="let nationality of nationalities"   [ngValue]="nationality.id">{{nationality.name}}</option>
+
+                  </select>
+                </div>
+
+              </div>
+              <!-- Repeat similar structure for other form controls -->
+              <!-- Example: -->
+              <div class="form-group row">
+
+              </div>
+              <!-- Add form controls for the remaining attributes -->
+              <div class="form-group row">
+
+
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-2 mb-3 mb-sm-0">
+                  <a>Officer :</a>
+                  <select class="form-control" formControlName="officer" >
+                    <option *ngIf="officer"  [ngValue]="officer.id">{{officer.name}}</option>
+
+                  </select>
+                </div>
+                <div class="col-sm-4">
+                  <a>Tel:</a>
+                  <input type="text" class="form-control" formControlName="tel" placeholder="Tel" required>
+                </div>
+
+                <div class="col-sm-4">
+                  <a>Mail:</a>
+                  <input type="text" class="form-control" formControlName="mail" placeholder="Mail" required>
+                </div>
+              </div>
+              <div class="form-group row">
+
+              </div>
+
+
+              <!--
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <input type="text" class="form-control" formControlName="taille" placeholder="Taille" required>
+                </div>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" formControlName="poids" placeholder="Poids" required>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-2 mb-3 mb-sm-0">
+                  <label><input type="checkbox" formControlName="maladie"> Maladie</label>
+                </div>
+                <div class="col-sm-4 mb-3 mb-sm-0">
+                  <textarea class="form-control" rows="1" formControlName="descriptionMaladies" placeholder="Description des maladies"></textarea>
+                </div>
+                <div class="col-sm-2">
+                  <label><input type="checkbox" formControlName="maladiesCancereuses"> Maladies Cancéreuses</label>
+                </div>
+                <div class="col-sm-4">
+                  <textarea class="form-control" rows="1" formControlName="descriptionMaladiesCancereuses" placeholder="Description des maladies cancéreuses"></textarea>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-2 mb-3 mb-sm-0">
+                  <label><input type="checkbox" formControlName="maladiesPsyciatrique"> Maladies Psychiatriques</label>
+                </div>
+                <div class="col-sm-4 mb-3 mb-sm-0">
+                  <textarea class="form-control" rows="1" formControlName="descriptionMaladiesPsyciatrique" placeholder="Description des maladies psychiatriques"></textarea>
+                </div>
+                <div class="col-sm-2">
+                  <label><input type="checkbox" formControlName="infirmite"> Infirmité</label>
+                </div>
+                <div class="col-sm-4">
+                  <textarea class="form-control" rows="1" formControlName="descriptionInfirmite" placeholder="Description de l'infirmité"></textarea>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-2 mb-3 mb-sm-0">
+                  <label><input type="checkbox" formControlName="operations"> Opérations</label>
+                </div>
+                <div class="col-sm-2">
+                  <input type="date" class="form-control" formControlName="epoqueOperations" placeholder="Époque des opérations">
+                </div>
+                <div class="col-sm-2 mb-3 mb-sm-0">
+                  <textarea class="form-control" rows="2" formControlName="descriptionOperations" placeholder="Description des opérations"></textarea>
+                </div>
+
+              </div>
+
+              <div class="form-group row">
+
+
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" formControlName="beneficiaire" placeholder="Bénéficiaire">
+                </div>
+                <div class="col-sm-6">
+                  <textarea class="form-control" rows="3" formControlName="description" placeholder="Description"></textarea>
+                </div>
+              </div>
+              -->
+              <!-- Add buttons for reset and submit -->
+              <div class="form-group row">
+              </div>
+              <div class="form-group row">
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-5">
+                </div>
+
+                <div class="col-sm-6">
+                  <button type="submit" class="btn btn-success btn-icon-split ml-2">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-check"></i>
+                  </span>
+                    <span class="text">Save</span>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+      <!-- /.container-fluid -->
+
+    </div>
+
+  </div>
+
+</div>
+
+<a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
+
+<app-logout></app-logout>
